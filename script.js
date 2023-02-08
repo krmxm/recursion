@@ -63,62 +63,62 @@ pow(2, 4);
 // Метод Array.isArray() возвращает true, если объект является массивом и
 // false, если он массивом не является;
 
-let students = {
-    js: [{
-        name: 'John',
-        progress: 100
-    }, {
-        name: 'Ivan',
-        progress: 60
-    }],
+// let students = {
+//     js: [{
+//         name: 'John',
+//         progress: 100
+//     }, {
+//         name: 'Ivan',
+//         progress: 60
+//     }],
 
-    html: {
-        basic: [{
-            name: 'Peter',
-            progress: 20
-        }, {
-            name: 'Ann',
-            progress: 18
-        }],
+//     html: {
+//         basic: [{
+//             name: 'Peter',
+//             progress: 20
+//         }, {
+//             name: 'Ann',
+//             progress: 18
+//         }],
 
-        pro: [{
-            name: 'Sam',
-            progress: 10
-        }],
+//         pro: [{
+//             name: 'Sam',
+//             progress: 10
+//         }],
 
-        semi: {
-            students: [{
-                name: 'Test',
-                progress: 100
-            }]
-        }
-    }
-};
+//         semi: {
+//             students: [{
+//                 name: 'Test',
+//                 progress: 100
+//             }]
+//         }
+//     }
+// };
 
-function getTotalProgressByIteration(data) {
-    let total = 0;
-    let students = 0;
+// function getTotalProgressByIteration(data) {
+//     let total = 0;
+//     let students = 0;
 
-    for (let course of Object.values(data)) {
-        if (Array.isArray(course)) {
-            students += course.length;
+//     for (let course of Object.values(data)) {
+//         if (Array.isArray(course)) {
+//             students += course.length;
 
-            for (let i = 0; i < course.length; i++) {
-                total += course[i].progress;
-            }
-        } else {
-            for (let subCourse of Object.values(course)) {
-                students += subCourse.length;
+//             for (let i = 0; i < course.length; i++) {
+//                 total += course[i].progress;
+//             }
+//         } else {
+//             for (let subCourse of Object.values(course)) {
+//                 students += subCourse.length;
                 
-                for (let i = 0; i < subCourse.length; i++) {
-                    total += subCourse[i].progress;
-                }
-            }
-        }
-    }
+//                 for (let i = 0; i < subCourse.length; i++) {
+//                     total += subCourse[i].progress;
+//                 }
+//             }
+//         }
+//     }
 
-    return total / students;
-}
+//     return total / students;
+// }
 
 // console.log(getTotalProgressByIteration(students));
 
@@ -126,28 +126,56 @@ function getTotalProgressByIteration(data) {
 
 // Рекурсия:
 
-function getTotalProgressByRecursion(data) {
-    if (Array.isArray(data)) {
-        let total = 0;
+// function getTotalProgressByRecursion(data) {
+//     if (Array.isArray(data)) {
+//         let total = 0;
 
-        for (let i = 0; i < data.length; i++) {
-            total += data[i].progress;
-        }
+//         for (let i = 0; i < data.length; i++) {
+//             total += data[i].progress;
+//         }
 
-        return [total, data.length];
+//         return [total, data.length];
+//     } else {
+//         let total = [0, 0];
+
+//         for (let subData of Object.values(data)) {
+//             const subDataArr = getTotalProgressByRecursion (subData);
+//             total[0] += subDataArr[0];
+//             total[1] += subDataArr[1];
+//         }
+
+//         return total;
+//     }
+// }
+
+// const result = getTotalProgressByRecursion(students);
+
+// console.log(result[0]/result[1]);
+
+// Задача 16. Напишите функцию, которая вычисляет факториал.
+
+// n! = n * (n - 1) * (n - 2) * ...*1 - это общая формула
+
+// Примеры значений для разных n:
+
+// 1! = 1
+// 2! = 2 * 1 = 2
+// 3! = 3 * 2 * 1 = 6
+// 4! = 4 * 3 * 2 * 1 = 24
+// 5! = 5 * 4 * 3 * 2 * 1 = 120
+
+function factorial(n) {
+    if (typeof(n) !== 'number' || !Number.isInteger(n) || n < 0) {
+        return "Ошибка, проверьте данные";
+    }
+
+    if (n >= 1) {
+        return n * factorial(n - 1);
     } else {
-        let total = [0, 0];
-
-        for (let subData of Object.values(data)) {
-            const subDataArr = getTotalProgressByRecursion (subData);
-            total[0] += subDataArr[0];
-            total[1] += subDataArr[1];
-        }
-
-        return total;
+        return 1;
     }
 }
 
-const result = getTotalProgressByRecursion(students);
+console.log(factorial(5));
 
-console.log(result[0]/result[1]);
+// Number.isInteger - проверка является ли число дробным
